@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NovaPulse — Real-Time Customer Analytics</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f0f9ff',
+              100: '#e0f2fe',
+              500: '#0ea5e9',
+              600: '#0284c7',
+              700: '#0369a1',
+              900: '#0c4a6e',
+            },
+            accent: {
+              500: '#f97316',
+              600: '#ea580c',
+            }
+          }
+        }
+      }
+    };
+  </script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased">
+
+  <!-- NAVIGATION BAR -->
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-slate-200">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      <!-- Logo -->
+      <a href="#" class="flex items-center gap-2 text-xl font-extrabold text-slate-900 tracking-tight">
+        <span class="w-8 h-8 rounded-lg bg-brand-600 text-white flex items-center justify-center font-bold">N</span>
+        <span>Nova<span class="text-brand-600">Pulse</span></span>
+      </a>
+
+      <!-- Desktop Menu -->
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
+        <a href="#features" class="hover:text-brand-600 transition">Features</a>
+        <a href="#how-it-works" class="hover:text-brand-600 transition">How It Works</a>
+        <a href="#pricing" class="hover:text-brand-600 transition">Pricing</a>
+        <a href="#contact" class="hover:text-brand-600 transition">Contact</a>
+      </nav>
+
+      <!-- Desktop CTA -->
+      <div class="hidden md:flex items-center gap-3">
+        <a href="#contact" class="bg-brand-600 hover:bg-brand-700 text-white text-sm font-semibold px-4 py-2.5 rounded-lg shadow-sm transition">
+          Get Started
+        </a>
+      </div>
+
+      <!-- Mobile Hamburger Button -->
+      <button
+        id="hamburger-btn"
+        type="button"
+        aria-label="Open menu"
+        aria-expanded="false"
+        onclick="window.toggleMobileNav()"
+        class="md:hidden inline-flex items-center justify-center p-2 rounded-lg text-slate-700 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-brand-500"
+      >
+        <svg id="icon-open" class="w-6 h-6 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+        <svg id="icon-close" style="display: none;" class="w-6 h-6 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile Dropdown Menu (Controlled directly via JS display property, no conflicting Tailwind hidden/md:hidden classes) -->
+    <div
+      id="mobile-menu-dropdown"
+      style="display: none; background-color: #ffffff; border-top: 1px solid #e2e8f0; width: 100%;"
+    >
+      <div class="px-6 py-5 flex flex-col space-y-4">
+        <a href="#features" onclick="window.closeMobileNav()" class="block text-base font-semibold text-slate-700 hover:text-brand-600 py-1">Features</a>
+        <a href="#how-it-works" onclick="window.closeMobileNav()" class="block text-base font-semibold text-slate-700 hover:text-brand-600 py-1">How It Works</a>
+        <a href="#pricing" onclick="window.closeMobileNav()" class="block text-base font-semibold text-slate-700 hover:text-brand-600 py-1">Pricing</a>
+        <a href="#contact" onclick="window.closeMobileNav()" class="block text-base font-semibold text-slate-700 hover:text-brand-600 py-1">Contact</a>
+        <a href="#contact" onclick="window.closeMobileNav()" class="block text-center bg-brand-600 hover:bg-brand-700 text-white font-semibold py-3 rounded-lg shadow-sm">
+          Request a Demo
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="pt-14 pb-20 md:pt-24 md:pb-28 bg-gradient-to-b from-brand-50 to-slate-50">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 grid md:grid-cols-2 gap-12 items-center">
+      <div>
+        <span class="inline-block text-xs font-bold uppercase tracking-wider text-brand-700 bg-brand-100 px-3 py-1 rounded-full">
+          Real-Time SaaS Analytics
+        </span>
+        <h1 class="mt-4 text-4xl sm:text-5xl font-extrabold text-slate-900 leading-tight">
+          Turn live customer signals into <span class="text-brand-600">predictable growth.</span>
+        </h1>
+        <p class="mt-5 text-lg text-slate-600 leading-relaxed">
+          NovaPulse tracks user journeys, spots churn risks early, and surfaces revenue opportunities in one clean dashboard—no SQL required.
+        </p>
+        <div class="mt-8 flex flex-col sm:flex-row gap-4">
+          <a href="#contact" class="bg-brand-600 hover:bg-brand-700 text-white font-semibold text-center px-6 py-3.5 rounded-xl shadow-md transition">
+            Request a Free Demo
+          </a>
+          <a href="#features" class="bg-white hover:bg-slate-100 text-slate-700 font-semibold text-center px-6 py-3.5 rounded-xl border border-slate-300 transition">
+            See How It Works
+          </a>
+        </div>
+        <p class="mt-4 text-xs text-slate-500">14-day free trial • No credit card required • 2-minute setup</p>
+      </div>
+
+      <!-- Dashboard Illustration SVG -->
+      <div class="bg-white p-6 rounded-2xl shadow-xl border border-slate-200">
+        <div class="flex items-center justify-between pb-4 border-b border-slate-100">
+          <div class="flex items-center gap-2">
+            <span class="w-3 h-3 rounded-full bg-rose-400"></span>
+            <span class="w-3 h-3 rounded-full bg-amber-400"></span>
+            <span class="w-3 h-3 rounded-full bg-emerald-400"></span>
+          </div>
+          <span class="text-xs font-medium text-slate-400">Live Revenue Pulse</span>
+        </div>
+        <div class="grid grid-cols-3 gap-3 mt-5">
+          <div class="bg-brand-50 p-3 rounded-xl">
+            <p class="text-xs text-slate-500">Active Users</p>
+            <p class="text-lg font-extrabold text-slate-900 mt-1">24,810</p>
+            <span class="text-xs font-semibold text-emerald-600">+18.4%</span>
+          </div>
+          <div class="bg-slate-50 p-3 rounded-xl">
+            <p class="text-xs text-slate-500">Retention</p>
+            <p class="text-lg font-extrabold text-slate-900 mt-1">94.2%</p>
+            <span class="text-xs font-semibold text-emerald-600">+3.1%</span>
+          </div>
+          <div class="bg-orange-50 p-3 rounded-xl">
+            <p class="text-xs text-slate-500">Alerts</p>
+            <p class="text-lg font-extrabold text-accent-600 mt-1">2 Low</p>
+            <span class="text-xs font-semibold text-slate-500">Healthy</span>
+          </div>
+        </div>
+        <svg class="w-full h-44 mt-6" viewBox="0 0 400 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="pulseFill" x1="0" y1="0" x2="0" y2="150" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#0ea5e9" stop-opacity="0.3" />
+              <stop offset="100%" stop-color="#0ea5e9" stop-opacity="0" />
+            </linearGradient>
+          </defs>
+          <path d="M10 120 L75 95 L140 105 L205 60 L270 70 L335 30 L390 20 L390 140 L10 140 Z" fill="url(#pulseFill)" />
+          <path d="M10 120 L75 95 L140 105 L205 60 L270 70 L335 30 L390 20" stroke="#0284c7" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" />
+          <circle cx="205" cy="60" r="5" fill="#0284c7" />
+          <circle cx="335" cy="30" r="5" fill="#f97316" />
+          <circle cx="390" cy="20" r="6" fill="#0284c7" />
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES SECTION -->
+  <section id="features" class="py-20 bg-white border-y border-slate-200">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="text-center max-w-2xl mx-auto">
+        <span class="text-xs font-bold uppercase tracking-wider text-brand-600">Core Capabilities</span>
+        <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold text-slate-900">Built for modern product teams</h2>
+        <p class="mt-3 text-slate-600">Everything you need to understand user behavior without complex data pipelines.</p>
+      </div>
+
+      <div class="mt-14 grid md:grid-cols-3 gap-8">
+        <!-- Feature 1 -->
+        <div class="p-7 rounded-2xl bg-slate-50 border border-slate-200/80 hover:shadow-md transition">
+          <div class="w-12 h-12 rounded-xl bg-brand-100 text-brand-600 flex items-center justify-center mb-5">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-slate-900">Instant Funnel Tracking</h3>
+          <p class="mt-2.5 text-slate-600 text-sm leading-relaxed">
+            Pinpoint the exact step where visitors drop off during onboarding and optimize conversions in real time.
+          </p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="p-7 rounded-2xl bg-slate-50 border border-slate-200/80 hover:shadow-md transition">
+          <div class="w-12 h-12 rounded-xl bg-orange-100 text-accent-600 flex items-center justify-center mb-5">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-slate-900">Smart Churn Alerts</h3>
+          <p class="mt-2.5 text-slate-600 text-sm leading-relaxed">
+            Receive automatic Slack or email alerts whenever a high-value account shows declining product engagement.
+          </p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="p-7 rounded-2xl bg-slate-50 border border-slate-200/80 hover:shadow-md transition">
+          <div class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center mb-5">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-slate-900">One-Click Executive Reports</h3>
+          <p class="mt-2.5 text-slate-600 text-sm leading-relaxed">
+            Share clean weekly revenue and retention digests with stakeholders automatically every Monday morning.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS SECTION -->
+  <section id="how-it-works" class="py-20 bg-slate-50">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 grid md:grid-cols-2 gap-12 items-center">
+      <div>
+        <span class="text-xs font-bold uppercase tracking-wider text-brand-600">Simple Onboarding</span>
+        <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold text-slate-900">Up and running in 3 simple steps</h2>
+        <p class="mt-3 text-slate-600">Connect your app once and let NovaPulse organize every customer interaction automatically.</p>
+
+        <div class="mt-8 space-y-6">
+          <div class="flex gap-4">
+            <div class="w-9 h-9 rounded-full bg-brand-600 text-white font-bold flex items-center justify-center shrink-0">1</div>
+            <div>
+              <h3 class="font-bold text-slate-900">Paste a single tracking snippet</h3>
+              <p class="text-sm text-slate-600 mt-1">Drop our lightweight 4KB script into your web app or connect via Stripe and Segment.</p>
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <div class="w-9 h-9 rounded-full bg-brand-600 text-white font-bold flex items-center justify-center shrink-0">2</div>
+            <div>
+              <h3 class="font-bold text-slate-900">Auto-capture key user events</h3>
+              <p class="text-sm text-slate-600 mt-1">Signups, feature clicks, and subscription upgrades appear on your live board right away.</p>
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <div class="w-9 h-9 rounded-full bg-brand-600 text-white font-bold flex items-center justify-center shrink-0">3</div>
+            <div>
+              <h3 class="font-bold text-slate-900">Act on automated insights</h3>
+              <p class="text-sm text-slate-600 mt-1">Trigger personalized onboarding nudges or alert your customer success team instantly.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Testimonial Card -->
+      <div class="bg-brand-900 text-white p-8 sm:p-10 rounded-3xl shadow-xl">
+        <span class="inline-block text-xs font-bold uppercase tracking-widest text-brand-200 bg-brand-800 px-3 py-1 rounded-full">
+          Customer Story
+        </span>
+        <blockquote class="mt-6 text-xl sm:text-2xl font-medium leading-relaxed">
+          “NovaPulse helped us cut trial drop-off by 32% in three weeks. Our entire product team checks it every morning.”
+        </blockquote>
+        <div class="mt-8 flex items-center gap-4">
+          <div class="w-11 h-11 rounded-full bg-accent-500 text-white font-bold flex items-center justify-center">
+            AR
+          </div>
+          <div>
+            <p class="font-bold text-white">Ananya Rao</p>
+            <p class="text-xs text-brand-200">Head of Growth, CloudScale Labs</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING SECTION -->
+  <section id="pricing" class="py-20 bg-white border-y border-slate-200">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      <div class="text-center max-w-2xl mx-auto">
+        <span class="text-xs font-bold uppercase tracking-wider text-brand-600">Transparent Pricing</span>
+        <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold text-slate-900">Plans that grow with your team</h2>
+        <p class="mt-3 text-slate-600">Switch between monthly and annual billing anytime.</p>
+
+        <!-- Billing Toggle -->
+        <div class="mt-7 inline-flex items-center gap-3 bg-slate-100 p-1.5 rounded-xl border border-slate-200">
+          <button id="btn-monthly" type="button" class="px-4 py-2 rounded-lg text-sm font-semibold bg-white text-slate-900 shadow-sm transition">
+            Monthly
+          </button>
+          <button id="btn-annual" type="button" class="px-4 py-2 rounded-lg text-sm font-semibold text-slate-600 hover:text-slate-900 transition">
+            Annual <span class="ml-1 text-xs font-bold text-emerald-600">Save 20%</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="mt-12 grid md:grid-cols-2 gap-8">
+        <!-- Startup Plan -->
+        <div class="p-8 rounded-2xl border border-slate-200 bg-slate-50 flex flex-col justify-between">
+          <div>
+            <h3 class="text-xl font-bold text-slate-900">Startup</h3>
+            <p class="text-sm text-slate-500 mt-1">Ideal for early-stage SaaS products.</p>
+            <div class="mt-6 flex items-baseline gap-1">
+              <span id="price-startup" class="text-4xl font-extrabold text-slate-900">$19</span>
+              <span class="text-sm text-slate-500">/ month</span>
+            </div>
+            <p id="billing-note-startup" class="text-xs text-slate-400 mt-1">Billed monthly</p>
+
+            <ul class="mt-6 space-y-3 text-sm text-slate-600">
+              <li class="flex items-center gap-2.5">
+                <span class="text-emerald-600 font-bold">✓</span> Up to 25,000 tracked events/mo
+              </li>
+              <li class="flex items-center gap-2.5">
+                <span class="text-emerald-600 font-bold">✓</span> Real-time funnel & retention boards
+              </li>
+              <li class="flex items-center gap-2.5">
+                <span class="text-emerald-600 font-bold">✓</span> 5 team member seats
+              </li>
+            </ul>
+          </div>
+
+          <button
+            type="button"
+            data-plan="Startup Plan"
+            class="select-plan-btn mt-8 w-full py-3 rounded-xl font-semibold bg-slate-900 hover:bg-slate-800 text-white transition"
+          >
+            Choose Startup
+          </button>
+        </div>
+
+        <!-- Business Plan -->
+        <div class="p-8 rounded-2xl border-2 border-brand-600 bg-white shadow-lg relative flex flex-col justify-between">
+          <span class="absolute -top-3.5 right-6 bg-accent-500 text-white text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full">
+            Most Popular
+          </span>
+          <div>
+            <h3 class="text-xl font-bold text-slate-900">Business</h3>
+            <p class="text-sm text-slate-500 mt-1">For scaling teams needing automated alerts.</p>
+            <div class="mt-6 flex items-baseline gap-1">
+              <span id="price-business" class="text-4xl font-extrabold text-slate-900">$59</span>
+              <span class="text-sm text-slate-500">/ month</span>
+            </div>
+            <p id="billing-note-business" class="text-xs text-slate-400 mt-1">Billed monthly</p>
+
+            <ul class="mt-6 space-y-3 text-sm text-slate-600">
+              <li class="flex items-center gap-2.5">
+                <span class="text-emerald-600 font-bold">✓</span> Up to 500,000 tracked events/mo
+              </li>
+              <li class="flex items-center gap-2.5">
+                <span class="text-emerald-600 font-bold">✓</span> Automated Slack & email churn alerts
+              </li>
+              <li class="flex items-center gap-2.5">
+                <span class="text-emerald-600 font-bold">✓</span> Unlimited team seats & priority support
+              </li>
+            </ul>
+          </div>
+
+          <button
+            type="button"
+            data-plan="Business Plan"
+            class="select-plan-btn mt-8 w-full py-3 rounded-xl font-semibold bg-brand-600 hover:bg-brand-700 text-white shadow-sm transition"
+          >
+            Choose Business
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT / DEMO REQUEST SECTION -->
+  <section id="contact" class="py-20 bg-slate-50">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6">
+      <div class="bg-white rounded-3xl shadow-xl border border-slate-200 p-8 sm:p-12">
+        <div class="text-center">
+          <span class="text-xs font-bold uppercase tracking-wider text-brand-600">Book a Live Walkthrough</span>
+          <h2 class="mt-2 text-3xl font-extrabold text-slate-900">Request your personalized demo</h2>
+          <p class="mt-2 text-slate-600 text-sm">See how NovaPulse works with your own product metrics in a 15-minute session.</p>
+        </div>
+
+        <form id="demo-form" novalidate class="mt-8 space-y-5">
+          <div class="grid sm:grid-cols-2 gap-5">
+            <div>
+              <label for="full-name" class="block text-xs font-bold uppercase tracking-wider text-slate-700">Full Name</label>
+              <input
+                id="full-name"
+                type="text"
+                placeholder="Priya Sharma"
+                class="mt-1.5 w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
+              />
+              <p id="err-name" style="display: none;" class="text-xs text-rose-600 mt-1">Please enter your full name.</p>
+            </div>
+
+            <div>
+              <label for="work-email" class="block text-xs font-bold uppercase tracking-wider text-slate-700">Work Email</label>
+              <input
+                id="work-email"
+                type="email"
+                placeholder="priya@company.com"
+                class="mt-1.5 w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
+              />
+              <p id="err-email" style="display: none;" class="text-xs text-rose-600 mt-1">Please enter a valid work email.</p>
+            </div>
+          </div>
+
+          <div>
+            <label for="plan-select" class="block text-xs font-bold uppercase tracking-wider text-slate-700">Interested Plan</label>
+            <select
+              id="plan-select"
+              class="mt-1.5 w-full px-4 py-3 rounded-xl border border-slate-300 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-brand-500"
+            >
+              <option value="Startup Plan">Startup Plan ($19/mo)</option>
+              <option value="Business Plan" selected>Business Plan ($59/mo)</option>
+            </select>
+          </div>
+
+          <button
+            type="submit"
+            class="w-full py-3.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold shadow-md transition"
+          >
+            Schedule My Demo
+          </button>
+        </form>
+
+        <!-- Form Success Banner -->
+        <div id="form-success" style="display: none;" class="mt-6 p-5 rounded-2xl bg-emerald-50 border border-emerald-200 text-center">
+          <p class="text-emerald-800 font-bold text-base">Demo request confirmed!</p>
+          <p id="success-details" class="text-emerald-700 text-sm mt-1"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-slate-900 text-slate-400 py-10">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm">
+      <div class="flex items-center gap-2 text-white font-bold">
+        <span class="w-7 h-7 rounded-md bg-brand-600 flex items-center justify-center text-xs">N</span>
+        <span>NovaPulse Analytics</span>
+      </div>
+      <p>&copy; 2026 NovaPulse Inc. • hello@novapulse.io</p>
+      <div class="flex gap-6">
+        <a href="#features" class="hover:text-white transition">Features</a>
+        <a href="#pricing" class="hover:text-white transition">Pricing</a>
+        <a href="#contact" class="hover:text-white transition">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Embedded fallback + External script.js so menu works even if opened directly from ZIP -->
+  <script src="script.js"></script>
+  <script>
+    if (typeof window.toggleMobileNav !== 'function') {
+      window.toggleMobileNav = function () {
+        var menu = document.getElementById('mobile-menu-dropdown');
+        var openIcon = document.getElementById('icon-open');
+        var closeIcon = document.getElementById('icon-close');
+        var btn = document.getElementById('hamburger-btn');
+        if (!menu) return;
+        var isHidden = menu.style.display === 'none' || menu.style.display === '';
+        menu.style.display = isHidden ? 'block' : 'none';
+        if (openIcon) openIcon.style.display = isHidden ? 'none' : 'block';
+        if (closeIcon) closeIcon.style.display = isHidden ? 'block' : 'none';
+        if (btn) btn.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
+      };
+      window.closeMobileNav = function () {
+        var menu = document.getElementById('mobile-menu-dropdown');
+        var openIcon = document.getElementById('icon-open');
+        var closeIcon = document.getElementById('icon-close');
+        var btn = document.getElementById('hamburger-btn');
+        if (menu) menu.style.display = 'none';
+        if (openIcon) openIcon.style.display = 'block';
+        if (closeIcon) closeIcon.style.display = 'none';
+        if (btn) btn.setAttribute('aria-expanded', 'false');
+      };
+    }
+  </script>
+</body>
+</html>
